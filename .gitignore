@@ -1,0 +1,5 @@
+/build/
+/*.pdf
+__pycache__/
+*.pyc
+.DS_Store

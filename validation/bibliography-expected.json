@@ -1,0 +1,47 @@
+{
+  "source": "https://raw.githubusercontent.com/COLM-org/Template/2026/colm2026_conference.bst",
+  "bst_sha256": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5",
+  "generator": "BibTeX 0.99e (TeX Live 2026), citation{*}; TeX markup removed; whitespace normalized",
+  "entries": [
+    {
+      "key": "book",
+      "text": "Ada Alpha. An Example Book, volume 2 of Example Series. Example Press, Baltimore, second edition, 2020. ISBN 978-1-2345-6789-0."
+    },
+    {
+      "key": "article",
+      "text": "Ada Alpha and Bob Beta. Can AI models reproduce results? Journal of Examples, 12(3):123–145, January 2024. ISSN 1234-5678. doi: 10.1234/example. URL https://example.org/article."
+    },
+    {
+      "key": "conference",
+      "text": "Ada Alpha, Bob Beta, and Cara Gamma. A conference example. In Eve Editor and Fred Editor (eds.), Proceedings of the Example Conference, pp. 9–12, Baltimore, 2025. Example Press."
+    },
+    {
+      "key": "chapter",
+      "text": "Bob Beta. An example chapter. In Eve Editor (ed.), Collected Examples, pp. 10–20. Example Press, Baltimore, 2021."
+    },
+    {
+      "key": "thesis",
+      "text": "Dan Delta. An Example Dissertation. PhD thesis, Example University, Baltimore, 2023."
+    },
+    {
+      "key": "web",
+      "text": "Example Organization. A web resource. URL https://example.org/resource."
+    },
+    {
+      "key": "report",
+      "text": "Cara Gamma. An example report. Technical Report 42, Example Institute, Baltimore, 2022. URL https://example.org/report."
+    },
+    {
+      "key": "same-a",
+      "text": "Sam Same, Amy Alpha, and Bob Beta. Zebra first. Journal of Examples, 2024a."
+    },
+    {
+      "key": "same-b",
+      "text": "Sam Same, Zoe Zeta, and Bob Beta. Apple second. Journal of Examples, 2024b."
+    },
+    {
+      "key": "Vaswani2017",
+      "text": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in Neural Information Processing Systems, volume 30. Curran Associates, Inc., 2017. URL https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf."
+    }
+  ]
+}

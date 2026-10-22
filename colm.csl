@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-US" demote-non-dropping-particle="never" page-range-format="expanded">
+  <info>
+    <title>COLM (unofficial Typst port)</title>
+    <id>urn:uuid:3c381b90-8fa9-4d29-a3c9-d5c0311d6797</id>
+    <link href="https://github.com/COLM-org/Template/blob/2026/colm2026_conference.bst" rel="documentation"/>
+    <summary>COLM's full-name, author-year bibliography format. Layout is set in colm.typ.</summary>
+    <updated>2026-09-16T00:00:00+00:00</updated>
+  </info>
+  <locale xml:lang="en">
+    <terms>
+      <term name="editor" form="short"><single>ed.</single><multiple>eds.</multiple></term>
+      <term name="page" form="short"><single>pp.</single><multiple>pp.</multiple></term>
+    </terms>
+  </locale>
+  <macro name="authors">
+    <names variable="author">
+      <name and="text" delimiter=", " delimiter-precedes-last="contextual" initialize="false"/>
+      <substitute>
+        <names variable="editor">
+          <name and="text" delimiter=", " delimiter-precedes-last="contextual" initialize="false"/>
+          <label form="short" prefix=" (" suffix=")"/>
+        </names>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="cite-author">
+    <names variable="author">
+      <name form="short" and="symbol" delimiter=", " delimiter-precedes-last="never" et-al-min="3" et-al-use-first="1"/>
+      <substitute>
+        <names variable="editor"/>
+        <text variable="citation-key"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="sort-name-count">
+    <names variable="author">
+      <name form="count"/>
+      <substitute><names variable="editor"/></substitute>
+    </names>
+  </macro>
+  <macro name="institution">
+    <choose>
+      <if variable="publisher"><text variable="publisher"/></if>
+      <else><text variable="authority"/></else>
+    </choose>
+  </macro>
+  <macro name="year">
+    <date variable="issued"><date-part name="year"/></date>
+  </macro>
+  <macro name="date">
+    <date variable="issued" delimiter=" ">
+      <date-part name="month" form="long"/>
+      <date-part name="year"/>
+    </date>
+  </macro>
+  <macro name="title">
+    <choose>
+      <if type="book" match="any"><text variable="title" font-style="italic"/></if>
+      <else-if type="thesis" variable="genre" match="all">
+        <text variable="title" font-style="italic"/>
+      </else-if>
+      <else><text variable="title" text-case="sentence"/></else>
+    </choose>
+  </macro>
+  <macro name="editors">
+    <names variable="editor">
+      <name and="text" delimiter=", " delimiter-precedes-last="contextual" initialize="false"/>
+      <label form="short" prefix=" (" suffix=")"/>
+    </names>
+  </macro>
+  <macro name="volume-series">
+    <choose>
+      <if variable="volume">
+        <group delimiter=" of ">
+          <text variable="volume" prefix="volume "/>
+          <text variable="collection-title" font-style="italic"/>
+        </group>
+      </if>
+      <else>
+        <group delimiter=" in ">
+          <text variable="collection-number" prefix="number "/>
+          <text variable="collection-title"/>
+        </group>
+      </else>
+    </choose>
+  </macro>
+  <macro name="edition">
+    <group delimiter=" ">
+      <choose>
+        <if is-numeric="edition"><number variable="edition" form="ordinal"/></if>
+        <else><text variable="edition" text-case="lowercase"/></else>
+      </choose>
+      <text term="edition"/>
+    </group>
+  </macro>
+  <macro name="pages">
+    <text variable="page" prefix="pp. "/>
+  </macro>
+  <macro name="in-container">
+    <group delimiter=", " prefix="In ">
+      <text macro="editors"/>
+      <text variable="container-title" font-style="italic"/>
+      <text macro="volume-series"/>
+      <text macro="pages"/>
+    </group>
+  </macro>
+  <macro name="publication">
+    <choose>
+      <if type="article-journal article-magazine article-newspaper" match="any">
+        <group delimiter=", ">
+          <text variable="container-title" font-style="italic"/>
+          <choose>
+            <if variable="volume issue" match="any">
+              <group delimiter=":">
+                <group>
+                  <text variable="volume"/>
+                  <text variable="issue" prefix="(" suffix=")"/>
+                </group>
+                <text variable="page"/>
+              </group>
+            </if>
+            <else><text macro="pages"/></else>
+          </choose>
+          <text macro="date"/>
+        </group>
+      </if>
+      <else-if type="paper-conference">
+        <choose>
+          <if variable="publisher-place">
+            <group delimiter=". ">
+              <group delimiter=", ">
+                <text macro="in-container"/>
+                <text variable="publisher-place"/>
+                <text macro="date"/>
+              </group>
+              <text variable="publisher"/>
+            </group>
+          </if>
+          <else-if variable="publisher">
+            <group delimiter=". ">
+              <text macro="in-container"/>
+              <group delimiter=", ">
+                <text variable="publisher"/>
+                <text macro="date"/>
+              </group>
+            </group>
+          </else-if>
+          <else>
+            <group delimiter=", "><text macro="in-container"/><text macro="date"/></group>
+          </else>
+        </choose>
+      </else-if>
+      <else-if type="chapter">
+        <group delimiter=". ">
+          <text macro="in-container"/>
+          <group delimiter=", ">
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+            <text macro="edition"/>
+            <text macro="date"/>
+          </group>
+        </group>
+      </else-if>
+      <else-if type="book">
+        <group delimiter=", ">
+          <text variable="publisher"/>
+          <text variable="publisher-place"/>
+          <text macro="edition"/>
+          <text macro="date"/>
+        </group>
+      </else-if>
+      <else-if type="report thesis" match="any">
+        <group delimiter=", ">
+          <group delimiter=" ">
+            <choose>
+              <if variable="genre"><text variable="genre" font-variant="small-caps"/></if>
+              <else-if type="report"><text value="Technical Report"/></else-if>
+              <else><text value="PhD thesis"/></else>
+            </choose>
+            <text variable="number"/>
+          </group>
+          <text macro="institution"/>
+          <text variable="publisher-place"/>
+          <text macro="date"/>
+        </group>
+      </else-if>
+      <else>
+        <group delimiter=", ">
+          <text variable="medium"/>
+          <text macro="date"/>
+        </group>
+      </else>
+    </choose>
+  </macro>
+  <!-- natbib preserves citation order and collapses consecutive identical authors. -->
+  <citation disambiguate-add-year-suffix="true" collapse="year-suffix" cite-group-delimiter="; " year-suffix-delimiter=";">
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <text macro="cite-author"/>
+        <text macro="year"/>
+        <group delimiter=" "><label variable="locator" form="short"/><text variable="locator"/></group>
+      </group>
+    </layout>
+  </citation>
+  <!-- COLM sorts by its short author/year label, full names, then BibTeX key. -->
+  <bibliography hanging-indent="true" entry-spacing="0" line-spacing="1">
+    <sort>
+      <key macro="cite-author" names-min="2" names-use-first="1"/>
+      <key macro="sort-name-count" names-min="4" names-use-first="3"/>
+      <key macro="cite-author" names-min="3" names-use-first="1"/>
+      <key macro="year"/>
+      <key variable="author"/>
+      <key variable="citation-key"/>
+    </sort>
+    <layout suffix=".">
+      <group delimiter=". ">
+        <text macro="authors"/>
+        <choose>
+          <if type="book">
+            <group delimiter=", "><text macro="title"/><text macro="volume-series"/></group>
+          </if>
+          <else><text macro="title"/></else>
+        </choose>
+        <text macro="publication"/>
+        <choose>
+          <if type="article-journal article-magazine article-newspaper" match="any"><text variable="ISSN" prefix="ISSN "/></if>
+          <else-if type="book chapter paper-conference" match="any"><text variable="ISBN" prefix="ISBN "/></else-if>
+        </choose>
+        <choose>
+          <if type="article-journal article-magazine article-newspaper book chapter paper-conference" match="any"><text variable="DOI" prefix="doi: "/></if>
+        </choose>
+        <text variable="URL" prefix="URL "/>
+        <text variable="note"/>
+      </group>
+    </layout>
+  </bibliography>
+</style>
